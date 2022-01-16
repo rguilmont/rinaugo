@@ -93,7 +93,7 @@ func TestZip(t *testing.T) {
 		{
 			NewOption(pointer(1)),
 			NewOption(pointer("1")),
-			NewOption[Zipped[int, string]](&Zipped[int, string]{1, "1"}),
+			NewOption(&Zipped[int, string]{1, "1"}),
 		},
 		{
 			NewOption(pointer(1)),
