@@ -1,7 +1,5 @@
 package options
 
-import "fmt"
-
 type nothing[A any] struct{}
 type some[A any] struct {
 	value A
@@ -31,7 +29,6 @@ func Nothing[A any]() Option[A] {
 
 // Returns true if the option is nothing{}, false otherwise.
 func IsEmpty[A any](o Option[A]) bool {
-	fmt.Printf("%T %+v\n", o, o)
 	if _, ok := o.(nothing[A]); ok {
 		return true
 	}

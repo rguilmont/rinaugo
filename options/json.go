@@ -46,3 +46,8 @@ func (n nothing[A]) MarshalJSON() ([]byte, error) {
 func (s some[A]) MarshalJSON() ([]byte, error) {
 	return json.Marshal(s.value)
 }
+
+// Just in case, marshaling OptionalJson should simply call the underlying method of Marshal
+func (o OptionalJson[A]) MarshalJSON() ([]byte, error) {
+	return json.Marshal(o.Get())
+}

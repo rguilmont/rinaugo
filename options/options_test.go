@@ -98,7 +98,7 @@ func TestZip(t *testing.T) {
 		{
 			NewOption(pointer(1)),
 			NewOption[string](nil),
-			Nothing[Zipped[int, string]]{},
+			Nothing[Zipped[int, string]](),
 		},
 	}
 
