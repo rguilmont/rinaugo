@@ -20,10 +20,21 @@ type Func10[A, B, C, D, E, F, G, H, I, J, K, L any] func(C, D, E, F, G, H, I, J,
 type Func11[A, B, C, D, E, F, G, H, I, J, K, L, M any] func(C, D, E, F, G, H, I, J, K, L, M) (A, B)
 
 type Effect[A, B any] func() either.Either[A, B] // Don't have better name yet :(
+type EffectL[A, B any] func() []either.Either[A, B]
 
 // ParRun allows to run the function Effect in parallel, and returns a channel of either
 func (e Effect[A, B]) ParRun() chan (either.Either[A, B]) {
 	c := make(chan (either.Either[A, B]))
+	go func() {
+		c <- e()
+		close(c)
+	}()
+	return c
+}
+
+// ParRun allows to run the function Effect in parallel, and returns a channel of either
+func (e EffectL[A, B]) ParRun() chan ([]either.Either[A, B]) {
+	c := make(chan ([]either.Either[A, B]))
 	go func() {
 		c <- e()
 		close(c)
